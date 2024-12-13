@@ -6,8 +6,8 @@ export const RegistrationForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {
-    dispatch(register(values)); // Отправляем данные в Redux
-    resetForm(); // Сбрасываем форму после успешной отправки
+    dispatch(register(values)); 
+    resetForm(); 
   };
 
   return (

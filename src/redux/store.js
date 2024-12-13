@@ -1,8 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { contactsReducer } from './contacts/slice';
 import { authReducer } from './auth/slice';
+import { filterReducer } from './filters/slice';
 
 export const store = configureStore({
   reducer: {
-    auth: authReducer, // Здесь используется правильный экспорт
+    contacts: contactsReducer,
+    auth: authReducer,
+    filter: filterReducer,
   },
 });

@@ -1,9 +1,11 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact, updateContact } from '../../redux/contacts/operations';
+import { selectFilteredContacts } from '../../redux/contacts/selectors'; // Убедитесь, что селектор возвращает уже отфильтрованные контакты
 import { useState } from 'react';
 
-export const ContactList = ({ contacts }) => {
+export const ContactList = () => {
   const dispatch = useDispatch();
+  const contacts = useSelector(selectFilteredContacts); // Получаем актуальные контакты из Redux
   const [editId, setEditId] = useState(null);
   const [editData, setEditData] = useState({ name: '', number: '' });
 

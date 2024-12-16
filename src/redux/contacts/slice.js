@@ -24,11 +24,12 @@ const contactsSlice = createSlice({
         state.items = state.items.filter((contact) => contact.id !== payload.id);
       })
       .addCase(editContact.fulfilled, (state, { payload }) => {
-        const index = state.items.findIndex((contact) => contact.id === payload.id);
-        if (index !== -1) {
-          state.items[index] = payload;
-        }
-      });
+  console.log('Before update:', state.items);
+  state.items = state.items.map((contact) =>
+    contact.id === payload.id ? payload : contact
+  );
+  console.log('After update:', state.items);
+});
   },
 });
 

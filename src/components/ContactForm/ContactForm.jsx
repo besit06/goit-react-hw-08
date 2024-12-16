@@ -6,17 +6,7 @@ export const ContactForm = ({ onAddContact }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Validate input
-    if (!name || !number) {
-      alert('Both fields are required!');
-      return;
-    }
-
-    // Pass the contact object to the handler
     onAddContact({ name, number });
-
-    // Clear the form
     setName('');
     setNumber('');
   };
@@ -24,21 +14,21 @@ export const ContactForm = ({ onAddContact }) => {
   return (
     <form onSubmit={handleSubmit}>
       <label>
-        Name
+        Name:
         <input
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Enter name"
+          required
         />
       </label>
       <label>
-        Number
+        Number:
         <input
           type="tel"
           value={number}
           onChange={(e) => setNumber(e.target.value)}
-          placeholder="Enter number"
+          required
         />
       </label>
       <button type="submit">Add Contact</button>

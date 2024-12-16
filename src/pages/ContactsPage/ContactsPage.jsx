@@ -1,44 +1,36 @@
-import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { fetchContacts, addContact, deleteContact } from '../../redux/contacts/operations';
-import { selectContacts, selectFilteredContacts } from '../../redux/contacts/selectors';
-import { ContactForm } from '../../components/ContactForm/ContactForm';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchContacts } from '../../redux/contacts/operations';
+import { selectContacts, selectIsLoading, selectError } from '../../redux/contacts/selectors';
 import { ContactList } from '../../components/ContactList/ContactList';
 import { Filter } from '../../components/Filter/Filter';
+import { ContactForm } from '../../components/ContactForm/ContactForm';
 
 export const ContactsPage = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(selectContacts);
-  const filteredContacts = useSelector(selectFilteredContacts);
+    const contacts = useSelector(selectContacts);
+    console.log('Fetched contacts:', contacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const handleAddContact = (contact) => {
-    const isDuplicate = contacts.some(
-      (existingContact) =>
-        existingContact.name.toLowerCase() === contact.name.toLowerCase()
-    );
-
-    if (isDuplicate) {
-      alert(`${contact.name} is already in contacts.`);
-      return;
-    }
-
-    dispatch(addContact(contact));
-  };
-
-  const handleDeleteContact = (id) => {
-    dispatch(deleteContact(id));
-  };
-
   return (
     <div>
-      <h1>Your Contacts</h1>
-      <ContactForm onAddContact={handleAddContact} />
+      <h1>Contacts</h1>
+      <ContactForm />
       <Filter />
-      <ContactList contacts={filteredContacts} onDeleteContact={handleDeleteContact} />
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error: {error}</p>}
+      {contacts.length > 0 ? (
+        <ContactList contacts={contacts} />
+      ) : (
+        <p>No contacts found</p>
+      )}
     </div>
   );
 };
+
+

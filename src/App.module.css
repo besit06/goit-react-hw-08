@@ -1,0 +1,16 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #fdfdfd;
+  color: #333;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #4a90e2;
+  margin-bottom: 20px;
+}

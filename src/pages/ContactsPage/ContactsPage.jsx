@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchContacts, addContact } from '../../redux/contacts/operations';
 import { selectContacts, selectIsLoading, selectError } from '../../redux/contacts/selectors';
-import { selectFilter } from '../../redux/filters/selectors'; // Добавьте селектор фильтра
+import { selectFilter } from '../../redux/filters/selectors'; 
 import { ContactList } from '../../components/ContactList/ContactList';
 import { Filter } from '../../components/Filter/Filter';
 import { ContactForm } from '../../components/ContactForm/ContactForm';
@@ -10,7 +10,7 @@ import { ContactForm } from '../../components/ContactForm/ContactForm';
 export const ContactsPage = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
-  const filter = useSelector(selectFilter); // Получение текущего фильтра
+  const filter = useSelector(selectFilter); 
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
@@ -22,7 +22,6 @@ export const ContactsPage = () => {
     dispatch(addContact(contact));
   };
 
-  // Фильтрация контактов
   const filteredContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(filter.toLowerCase())
   );

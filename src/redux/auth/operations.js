@@ -1,20 +1,20 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// Установка базового URL для API
+
 axios.defaults.baseURL = 'https://connections-api.goit.global';
 
-// Добавление токена в заголовок
+
 const setAuthHeader = (token) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-// Удаление токена из заголовка
+
 const clearAuthHeader = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-// Операция регистрации
+
 export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
@@ -28,7 +28,7 @@ export const register = createAsyncThunk(
   }
 );
 
-// Операция логина
+
 export const logIn = createAsyncThunk(
   'auth/login',
   async (credentials, thunkAPI) => {
@@ -42,7 +42,7 @@ export const logIn = createAsyncThunk(
   }
 );
 
-// Операция логаута
+
 export const logOut = createAsyncThunk(
   'auth/logout',
   async (_, thunkAPI) => {
@@ -55,7 +55,7 @@ export const logOut = createAsyncThunk(
   }
 );
 
-// Операция обновления пользователя
+
 export const refreshUser = createAsyncThunk(
   'auth/refresh',
   async (_, thunkAPI) => {

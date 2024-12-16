@@ -6,10 +6,12 @@ import { ContactsPage } from './pages/ContactsPage/ContactsPage';
 import { PrivateRoute } from './components/PrivateRoute/PrivateRoute';
 import { RestrictedRoute } from './components/RestrictedRoute/RestrictedRoute';
 import { AppBar } from './components/AppBar/AppBar';
+import { Toaster } from 'react-hot-toast';
 
 export const App = () => {
   return (
     <div>
+      <Toaster position="top-right" reverseOrder={false} />
       <AppBar />
       <Routes>
         <Route path="/" element={<HomePage />} />

@@ -3,8 +3,17 @@ import { deleteContact, updateContact } from '../../redux/contacts/operations';
 import { selectFilteredContacts } from '../../redux/contacts/selectors';
 import { useState } from 'react';
 import { ConfirmationModal } from '../Modal/Modal'; 
-import s from './ContactList.module.css';
-
+import {
+  List,
+  ListItem,
+  ListItemText,
+  Button,
+  IconButton,
+  TextField,
+  Box,
+} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export const ContactList = () => {
   const dispatch = useDispatch();
@@ -51,38 +60,57 @@ export const ContactList = () => {
 
   return (
     <>
-      <ul className={s.list}>
+      <List>
         {contacts.map((contact) => (
-          <li key={contact.id}>
+          <ListItem key={contact.id} divider>
             {editId === contact.id ? (
-              <>
-                <input
-                  type="text"
+              <Box
+                sx={{ display: 'flex', gap: 2, alignItems: 'center', width: '100%' }}
+              >
+                <TextField
                   name="name"
+                  label="Name"
                   value={editData.name}
                   onChange={handleChange}
+                  size="small"
                 />
-                <input
-                  type="tel"
+                <TextField
                   name="number"
+                  label="Number"
                   value={editData.number}
                   onChange={handleChange}
+                  size="small"
                 />
-                <button onClick={handleSave}>Save</button>
-                <button onClick={() => setEditId(null)}>Cancel</button>
-              </>
+                <Button variant="contained" color="success" onClick={handleSave}>
+                  Save
+                </Button>
+                <Button variant="outlined" onClick={() => setEditId(null)}>
+                  Cancel
+                </Button>
+              </Box>
             ) : (
               <>
-                <span>{contact.name}: {contact.number}</span>
-                <button onClick={() => handleEdit(contact.id)}>Edit</button>
-                <button onClick={() => handleDeleteClick(contact.id)}>Delete</button>
+                <ListItemText
+                  primary={contact.name}
+                  secondary={contact.number}
+                />
+                <IconButton color="primary" onClick={() => handleEdit(contact.id)}>
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  edge="end"
+                  color="error"
+                  onClick={() => handleDeleteClick(contact.id)}
+                >
+                  <DeleteIcon />
+                </IconButton>
               </>
             )}
-          </li>
+          </ListItem>
         ))}
-      </ul>
+      </List>
 
-            <ConfirmationModal
+      <ConfirmationModal
         isOpen={isModalOpen}
         onClose={closeModal}
         onConfirm={confirmDelete}

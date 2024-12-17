@@ -1,43 +1,24 @@
-import { AppBar, Toolbar, Typography, Button, Box } from '@mui/material';
-import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { AppBar as MuiAppBar, Toolbar, Typography, Box } from '@mui/material';
+import { Navigation } from '../Navigation/Navigation';
+import { UserMenu } from '../UserMenu/UserMenu';
+import { AuthNav } from '../AuthNav/AuthNav';
 import { selectIsLoggedIn } from '../../redux/auth/selectors';
 
-export const AppBarComponent = () => {
+export const AppBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
-    <AppBar position="static" color="primary">
+    <MuiAppBar position="static" color="primary">
       <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          PhoneBook
+        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+          Phonebook
         </Typography>
-
-        <Box>
-          <Button color="inherit" component={NavLink} to="/">
-            Home
-          </Button>
-          {isLoggedIn ? (
-            <>
-              <Button color="inherit" component={NavLink} to="/contacts">
-                Contacts
-              </Button>
-              <Button color="inherit" component={NavLink} to="/logout">
-                Logout
-              </Button>
-            </>
-          ) : (
-            <>
-              <Button color="inherit" component={NavLink} to="/register">
-                Register
-              </Button>
-              <Button color="inherit" component={NavLink} to="/login">
-                Login
-              </Button>
-            </>
-          )}
+        <Box sx={{ display: 'flex', gap: '20px' }}>
+          <Navigation />
+          {isLoggedIn ? <UserMenu /> : <AuthNav />}
         </Box>
       </Toolbar>
-    </AppBar>
+    </MuiAppBar>
   );
 };

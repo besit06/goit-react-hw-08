@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, deleteContact, editContact } from './operations';
+import { logOut } from '../auth/operations';
 
 
 const contactsSlice = createSlice({
@@ -36,7 +37,12 @@ const contactsSlice = createSlice({
   );
         console.log('After update:', state.items);
         
-});
+      })
+    .addCase(logOut.fulfilled, (state) => {
+        state.items = [];
+        state.isLoading = false;
+        state.error = null;
+      });
   },
 });
 

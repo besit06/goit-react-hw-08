@@ -10,7 +10,7 @@ const RegisterSchema = Yup.object().shape({
   password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
 });
 
-export const RegisterForm = () => {
+export const RegistrationForm = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, { resetForm }) => {

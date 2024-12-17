@@ -29,7 +29,7 @@ export const ContactsPage = () => {
   return (
     <div>
       <h1>Contacts</h1>
-      <ContactForm onAddContact={handleAddContact} />
+      <ContactForm onSubmit={handleAddContact} />
       <Filter />
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}

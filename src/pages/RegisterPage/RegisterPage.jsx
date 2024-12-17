@@ -1,4 +1,4 @@
-import { RegisterForm } from '../../components/RegisterForm/RegisterForm';
+import { RegistrationForm } from '../../components/RegistrationForm/RegistrationForm';
 import { Container, Typography, Box } from '@mui/material';
 
 export const RegisterPage = () => {
@@ -12,7 +12,7 @@ export const RegisterPage = () => {
           Join us to start managing your contacts!
         </Typography>
       </Box>
-      <RegisterForm />
+      <RegistrationForm />
     </Container>
   );
 };
